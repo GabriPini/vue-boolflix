@@ -18,14 +18,54 @@
       v-model="searchKey"
       @keyup.enter="$emit('getsearchkey', searchKey)"
      />
-     <button class="btn btn-light" @click="getMovies()">click</button>
+     <button class="btn fw-bold btn-light" @click="getVideo()">Search</button>
     </div>
 
-    <div v-for="(element, index) in movieArray" :key="index">
-     <ol class="text-light pt-5">
+    <div
+     class="col-2 border ms_movie"
+     v-for="(element, index) in movieList"
+     :key="index"
+    >
+     <ol>
       <li>{{ element.title }}</li>
       <li>{{ element.original_title }}</li>
-      <li>{{ element.original_language }}</li>
+      <li v-if="element.original_language === 'en'">
+       <country-flag country="gb" />
+       {{ element.original_language.toUpperCase() }}
+      </li>
+       <li v-else-if="element.original_language === 'ja'">
+       <country-flag country="jp" />
+       {{ element.original_language.toUpperCase() }}
+      </li>
+      <li v-else-if="element.original_language === element.original_language">
+       <country-flag :country="element.original_language" />
+       {{ element.original_language.toUpperCase() }}
+      </li>
+      <li>{{ element.vote_average }}</li>
+      <!-- <li>{{ element.original_language }}</li> -->
+     </ol>
+    </div>
+
+    <div
+     class="col-2 border ms_tvserie"
+     v-for="(element, index) in tvList"
+     :key="index"
+    >
+     <ol>
+      <li>{{ element.name }}</li>
+      <li>{{ element.original_name }}</li>
+      <li v-if="element.original_language === 'en'">
+       <country-flag country="gb" />
+       {{ element.original_language.toUpperCase() }}
+      </li>
+         <li v-else-if="element.original_language === 'ja'">
+       <country-flag country="jp" />
+       {{ element.original_language.toUpperCase() }}
+      </li>
+      <li v-else-if="element.original_language === element.original_language">
+       <country-flag :country="element.original_language" />
+       {{ element.original_language.toUpperCase() }}
+      </li>
       <li>{{ element.vote_average }}</li>
      </ol>
     </div>
@@ -41,20 +81,33 @@ export default {
  data: function () {
   return {
    searchKey: "",
-   movieArray: [],
+   movieList: [],
+   tvList: [],
   };
  },
  methods: {
-  getMovies() {
-   axios
-    .get(
-     "https://api.themoviedb.org/3/search/movie?api_key=f2f36017261317fa70370c98c6837f2a&query=" +
-      this.searchKey
-    )
-    .then((answer) => {
-     console.log(answer.data.results);
-     this.movieArray = [...answer.data.results];
-    });
+  getVideo() {
+   if (this.searchKey.length > 0) {
+    axios
+     .get(
+      "https://api.themoviedb.org/3/search/movie?api_key=f2f36017261317fa70370c98c6837f2a&language=it&query=" +
+       this.searchKey
+     )
+
+     .then((answer) => {
+      // console.log(answer.data.results)
+      this.movieList = [...answer.data.results];
+     });
+    axios
+     .get(
+      "https://api.themoviedb.org/3/search/tv?api_key=f2f36017261317fa70370c98c6837f2a&language=it_IT&query=" +
+       this.searchKey
+     )
+     .then((answer) => {
+      console.log(answer.data.results);
+      this.tvList = [...answer.data.results];
+     });
+   }
   },
  },
 };
@@ -64,5 +117,15 @@ export default {
 @import "@/assets/scss/variables.scss";
 header {
  background-color: $headerBgColor;
+ img {
+  height: 100px;
+ }
+ .ms_tvserie,
+ .ms_movie {
+   color: white;
+  img {
+   height: 10px;
+  }
+ }
 }
 </style>
