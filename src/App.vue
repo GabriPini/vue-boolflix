@@ -1,6 +1,6 @@
 <template>
  <div id="app">
-  <HeaderComponent @click="getVideoList" @keyup.enter="getVideoList" />
+  <HeaderComponent @click="getVideoList"/>
   <MainComponent :movieList="movieList" :tvList="tvList" />
  </div>
 </template>
