@@ -17,7 +17,7 @@
       class="p-1"
       type="text"
       v-model="searchKey"
-      @keyup.enter="$emit('click', searchKey)"
+      @keyup="$emit('click', searchKey)"
      />
      <button class="btn fw-bold btn-light" @click="$emit('click', searchKey)">
       Search
