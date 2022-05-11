@@ -6,14 +6,14 @@
     </div>
     <!-- Ciclo all interno della lista dei film (al quale ho aggiunto una A alla :key per evitare l'errore della key duplicata)-->
     <div
-     class="col-lg-2 col-md-3 col-sm-4 text-white ms_video-card mx-1 my-3"
+     class="col-lg-2 col-md-3 col-sm-4 text-white text-center ms_video-card mx-1 my-3"
      v-for="(element, index) in movieList"
      :key="'A' + index"
      @mouseover="ActorList(element.id)"
     >
      <!-- stampo l'immagine del film in questione se presente , altrimenti mostro solo il titolo del film  -->
      <div class="ms_cover-image" >
-      <h3 v-if="element.poster_path == null">{{ element.title }}</h3>
+      <h3 v-if="element.poster_path == null" class="altFoto">{{ element.title }}</h3>
       <img
        v-else
        :src="imgBaseUrl + element.poster_path"
@@ -46,7 +46,7 @@
       </li>
       <li v-if="ListActor.length>0">
          <span class="fw-bold">Attori:</span>
-         <div class="text-start" v-for="(actor, index) in ListActor" :key="index">
+         <div v-for="(actor, index) in ListActor" :key="index">
            <span class="text-success">{{ListActor[index].name}}</span>
          </div>
          </li>

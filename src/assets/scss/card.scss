@@ -5,34 +5,50 @@ ul {
    }
    main {
     .ms_video-card {
-     background-color: $headerBgColor;
      overflow: hidden;
      height: 360px;
-     border-radius: 25px;
+     
      .ms_cover-image {
       height: 100%;
       overflow: hidden;
+      .altFoto{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $headerBgColor;
+        margin-top: 40px;
+        height: 79%;
+        width: 100%;
+      }
       img {
        height: 100%;
        width: 100%;
        object-fit: contain;
+       
       }
      }
      ul {
-      display: none;
-   
+      display: block;
+        width: 0;
+        height: 0;
+        transition: width 1s , height 1s;
       li {
        font-size: 0.8rem;
       }
      }
      &:hover ul {
+      background-color: $headerBgColor;
       display: block;
       height: 100%;
+      width: 100%;
+      border-radius: 25px;
       overflow-y: scroll;
       overflow-x: hidden;
      }
      &:hover .ms_cover-image {
-      display: none;
+      width: 0;
+      height: 0;
+      transition: width 1s , height 1s;
      }
     }
    }

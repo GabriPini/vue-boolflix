@@ -6,13 +6,14 @@
     </div>
     <!-- ciclo all'interno dell'array delle serie tv  -->
     <div
-     class="col-lg-2 col-md-3 col-sm-4 text-white ms_video-card mx-1 my-3"
+     class="col-lg-2 col-md-3 col-sm-4 text-white text-center ms_video-card mx-1 my-3"
      v-for="(element, index) in tvList"
      :key="index"
+     @mouseover="ActorList(element.id)" 
     >
      <!-- stampo immagine serie tv , semancante stampo il titolo  -->
      <div class="ms_cover-image">
-      <h3 v-if="element.poster_path === null">{{ element.name }}</h3>
+      <h3 v-if="element.poster_path === null" class="altFoto">{{ element.name }}</h3>
       <img v-else :src="imgBaseUrl + element.poster_path" :alt="element.name" />
      </div>
      <!--nella lista mostro le varie infomazioni riguardanti il film che compaiono solo all'hoover della card  -->
@@ -39,6 +40,12 @@
        <country-flag :country="element.original_language" />
        {{ element.original_language.toUpperCase() }}
       </li>
+      <li v-if="ListActorTv.length>0">
+         <span class="fw-bold">Attori:</span>
+         <div v-for="(actor, index) in ListActorTv" :key="index">
+           <span class="text-success">{{ListActorTv[index].name}}</span>
+         </div>
+         </li>
       <li><StarComponent :vote="element.vote_average" /></li>
       <li><span class="fw-bold">Overview:</span> {{ element.overview }}</li>
      </ul>
@@ -50,6 +57,7 @@
 <script>
 /* importo le stelle da usare per mostrare la valutazione gia formattata da 0 a 5  */
 import StarComponent from "@/components/StarComponent.vue";
+import axios from 'axios'
 export default {
  name: "TvComponent",
  components: {
@@ -60,8 +68,17 @@ export default {
   return {
    /* percorso per stampare le immagini in pagina  */
    imgBaseUrl: "https://image.tmdb.org/t/p/w342/",
+  ListActorTv:[],
   };
  },
+ methods:{
+   ActorList(movie){
+     axios.get(`https://api.themoviedb.org/3/tv/${movie}/credits?api_key=f2f36017261317fa70370c98c6837f2a&language=en-US`)
+     .then((response)=>{
+       this.ListActorTv=response.data.cast.slice(0,5)
+     })
+   }
+ }
 };
 </script>
 
