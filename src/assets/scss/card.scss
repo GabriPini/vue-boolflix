@@ -1,0 +1,35 @@
+ul {
+    list-style: none;
+   }
+   main {
+    .ms_video-card {
+     background-color: $headerBgColor;
+     overflow: hidden;
+     height: 360px;
+     .ms_cover-image {
+      height: 100%;
+      overflow: hidden;
+      img {
+       height: 100%;
+       width: 100%;
+       object-fit: contain;
+      }
+     }
+     ul {
+      display: none;
+   
+      li {
+       font-size: 0.8rem;
+      }
+     }
+     &:hover ul {
+      display: block;
+      height: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+     }
+     &:hover .ms_cover-image {
+      display: none;
+     }
+    }
+   }

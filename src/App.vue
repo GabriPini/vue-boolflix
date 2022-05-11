@@ -39,7 +39,7 @@ export default {
      });
     /* Chiamata API per le serie Tv */
     Axios.get(
-     "https://api.themoviedb.org/3/search/tv?api_key=f2f36017261317fa70370c98c6837f2a&language=it_IT&query=" +
+     "https://api.themoviedb.org/3/search/tv?api_key=f2f36017261317fa70370c98c6837f2a&language=it&query=" +
       key
     )
      .then((answer) => {

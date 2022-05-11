@@ -34,8 +34,6 @@ export default {
  data: function () {
   return {
    searchKey: "",
-   movieList: [],
-   tvList: [],
   };
  },
 };
