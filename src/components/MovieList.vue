@@ -9,7 +9,7 @@
      class="col-lg-2 col-md-3 col-sm-4 text-white text-center ms_video-card mx-1 my-3"
      v-for="(element, index) in movieList"
      :key="'A' + index"
-     @mouseover="ActorList(element.id)"
+     @mouseover="ActorList(element.id) , GenreList(element.genre_ids)"
     >
      <!-- stampo l'immagine del film in questione se presente , altrimenti mostro solo il titolo del film  -->
      <div class="ms_cover-image" >
@@ -27,6 +27,16 @@
        <span class="fw-bold">Titolo originale:</span>
        {{ element.original_title }}
       </li>
+        <li>
+         <span class="fw-bold">Genere:</span>
+         <div v-for="(genre, index) in ListGenre" :key="'C'+ index">
+           <span class="text-success" v-if="genre.id == element.genre_ids[0]"> {{genre.name}}</span>
+           <span class="text-success" v-if="genre.id == element.genre_ids[1]"> {{genre.name}}</span>
+           <span class="text-success" v-if="genre.id == element.genre_ids[2]"> {{genre.name}}</span>
+           <span class="text-success" v-if="genre.id == element.genre_ids[3]"> {{genre.name}}</span>
+           <span class="text-success" v-if="genre.id == element.genre_ids[4]"> {{genre.name}}</span>
+         </div>
+         </li>
       <!-- Mostro una bandiera in base alla lingua del film insieme alla sigla della lingua, se presente nella libreria esterna installata tramite terminale la mostro 
       implemento di regole di eccezione dato che la sigla della lingua non combacia con la sigla nella libreria  -->
       <li v-if="element.original_language === 'en'">
@@ -70,6 +80,7 @@ export default {
  data: function () {
   return {
     ListActor:[],
+    ListGenre:[],
    /* percorso per stampare le immagini in pagina  */
    imgBaseUrl: "https://image.tmdb.org/t/p/w342/",
   };
@@ -79,6 +90,15 @@ export default {
      axios.get(`https://api.themoviedb.org/3/movie/${movie}/credits?api_key=f2f36017261317fa70370c98c6837f2a&language=en-US`)
      .then((response)=>{
        this.ListActor=response.data.cast.slice(0,5)
+     })
+   },
+   GenreList(element){
+     axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=f2f36017261317fa70370c98c6837f2a&language=en-US")
+     .then((response)=>{
+      if(element.genre_ids == response.data.id ){
+        this.ListGenre = response.data.genres
+        }
+
      })
    }
  }
