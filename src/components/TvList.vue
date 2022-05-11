@@ -26,11 +26,11 @@
       <li >
          <span class="fw-bold">Genere:</span>
          <div v-for="(genre, index) in ListGenre" :key="index">
-           <span class="text-success" v-if="genre.id == element.genre_ids[0]"> {{genre.name}}</span>
-           <span class="text-success" v-if="genre.id == element.genre_ids[1]"> {{genre.name}}</span>
-           <span class="text-success" v-if="genre.id == element.genre_ids[2]"> {{genre.name}}</span>
-           <span class="text-success" v-if="genre.id == element.genre_ids[3]"> {{genre.name}}</span>
-           <span class="text-success" v-if="genre.id == element.genre_ids[4]"> {{genre.name}}</span>
+           <span class="text-warning" v-if="genre.id == element.genre_ids[0]"> {{genre.name}}</span>
+           <span class="text-warning" v-if="genre.id == element.genre_ids[1]"> {{genre.name}}</span>
+           <span class="text-warning" v-if="genre.id == element.genre_ids[2]"> {{genre.name}}</span>
+           <span class="text-warning" v-if="genre.id == element.genre_ids[3]"> {{genre.name}}</span>
+           <span class="text-warning" v-if="genre.id == element.genre_ids[4]"> {{genre.name}}</span>
          </div>
       </li>
       <!-- Mostro una bandiera in base alla lingua del film insieme alla sigla della lingua, se presente nella libreria esterna installata tramite terminale la mostro 
@@ -90,7 +90,7 @@ export default {
      })
    },
    GenreList(element){
-     axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=f2f36017261317fa70370c98c6837f2a&language=en-US")
+     axios.get("https://api.themoviedb.org/3/genre/tv/list?api_key=f2f36017261317fa70370c98c6837f2a&language=en-US")
      .then((response)=>{
       if(element.genre_ids == response.data.id ){
         this.ListGenre = response.data.genres
