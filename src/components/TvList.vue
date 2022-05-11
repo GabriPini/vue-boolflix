@@ -1,12 +1,12 @@
 <template>
   <div class="row justify-content-center">
     <!-- Sezione Serie Tv  -->
-    <div  class="col-12 text-white">
-     <h2>SERIE TV :</h2>
+    <div  class="col-12 text-white text-center mt-4">
+     <h2>SERIE TV</h2>
     </div>
     <!-- ciclo all'interno dell'array delle serie tv  -->
     <div
-     class="col-2 text-white ms_video-card mx-1 my-3"
+     class="col-lg-2 col-md-3 col-sm-4 text-white ms_video-card mx-1 my-3"
      v-for="(element, index) in tvList"
      :key="index"
     >

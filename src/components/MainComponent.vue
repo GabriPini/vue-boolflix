@@ -34,7 +34,7 @@ export default {
 
 
 main {
- min-height: calc(100vh - 75px);
+ min-height: calc(100vh);
  background-color: $mainBgColor;
 }
 </style>

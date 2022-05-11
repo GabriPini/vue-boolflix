@@ -1,12 +1,12 @@
 <template>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center pt-5">
      <!-- sezione Film -->
-    <div  class="col-12 text-white">
-     <h2>FILM:</h2>
+    <div  class="col-12 text-white text-center mt-4 pt-5">
+     <h2>FILM</h2>
     </div>
     <!-- Ciclo all interno della lista dei film (al quale ho aggiunto una A alla :key per evitare l'errore della key duplicata)-->
     <div
-     class="col-2 text-white ms_video-card mx-1 my-3"
+     class="col-lg-2 col-md-3 col-sm-4 text-white ms_video-card mx-1 my-3"
      v-for="(element, index) in movieList"
      :key="'A' + index"
     >

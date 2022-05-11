@@ -43,6 +43,9 @@ export default {
 @import "@/assets/scss/variables.scss";
 header {
  background-color: $headerBgColor;
+ position: fixed;
+ z-index: 1;
+ width: 100%;
  img {
   height: 75px;
  }

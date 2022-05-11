@@ -1,3 +1,5 @@
+*::-webkit-scrollbar{width: 1px;}
+
 ul {
     list-style: none;
    }
@@ -6,6 +8,7 @@ ul {
      background-color: $headerBgColor;
      overflow: hidden;
      height: 360px;
+     border-radius: 25px;
      .ms_cover-image {
       height: 100%;
       overflow: hidden;
