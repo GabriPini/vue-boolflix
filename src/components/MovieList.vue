@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-center pt-5">
+  <div class="row justify-content-center pt-5" >
      <!-- sezione Film -->
     <div  class="col-12 text-white text-center mt-4 pt-5">
      <h2>FILM</h2>
@@ -9,9 +9,10 @@
      class="col-lg-2 col-md-3 col-sm-4 text-white ms_video-card mx-1 my-3"
      v-for="(element, index) in movieList"
      :key="'A' + index"
+     @mouseover="ActorList(element.id)"
     >
      <!-- stampo l'immagine del film in questione se presente , altrimenti mostro solo il titolo del film  -->
-     <div class="ms_cover-image">
+     <div class="ms_cover-image" >
       <h3 v-if="element.poster_path == null">{{ element.title }}</h3>
       <img
        v-else
@@ -43,6 +44,12 @@
        <country-flag :country="element.original_language" />
        {{ element.original_language.toUpperCase() }}
       </li>
+      <li v-if="ListActor.length>0">
+         <span class="fw-bold">Attori:</span>
+         <div class="text-start" v-for="(actor, index) in ListActor" :key="index">
+           <span class="text-success">{{ListActor[index].name}}</span>
+         </div>
+         </li>
       <li><StarComponent :vote="element.vote_average" /></li>
       <li><span class="fw-bold">Overview:</span> {{ element.overview }}</li>
      </ul>
@@ -53,6 +60,7 @@
 <script>
 /* importo le stelle da usare per mostrare la valutazione gia formattata da 0 a 5  */
 import StarComponent from "@/components/StarComponent.vue";
+import axios from 'axios'
 export default {
  name: "MovieComponent",
  components: {
@@ -61,10 +69,19 @@ export default {
  props: ["movieList"],
  data: function () {
   return {
+    ListActor:[],
    /* percorso per stampare le immagini in pagina  */
    imgBaseUrl: "https://image.tmdb.org/t/p/w342/",
   };
  },
+ methods:{
+   ActorList(movie){
+     axios.get(`https://api.themoviedb.org/3/movie/${movie}/credits?api_key=f2f36017261317fa70370c98c6837f2a&language=en-US`)
+     .then((response)=>{
+       this.ListActor=response.data.cast.slice(0,5)
+     })
+   }
+ }
 };
 </script>
 
