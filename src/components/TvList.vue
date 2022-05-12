@@ -1,8 +1,8 @@
 <template>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center pt-">
     <!-- Sezione Serie Tv  -->
-    <div  class="col-12 text-white text-center mt-4">
-     <h2>SERIE TV</h2>
+    <div  class="col-12 text-white text-center mt-4 pt-5">
+     <h2 class="fw-bold display-4">SERIE TV</h2>
     </div>
     <!-- ciclo all'interno dell'array delle serie tv  -->
     <div

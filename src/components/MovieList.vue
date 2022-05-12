@@ -2,7 +2,7 @@
   <div class="row justify-content-center pt-5" >
      <!-- sezione Film -->
     <div  class="col-12 text-white text-center mt-4 pt-5">
-     <h2>FILM</h2>
+     <h2 class="fw-bold display-4">FILM</h2>
     </div>
     <!-- Ciclo all interno della lista dei film (al quale ho aggiunto una A alla :key per evitare l'errore della key duplicata)-->
     <div
